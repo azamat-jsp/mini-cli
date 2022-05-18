@@ -16,9 +16,14 @@ class RedisClient
         $this->options = ['replication' => true];
     }
 
-    public function getClient()
+    public function getClient(): Client
     {
-        return new Client($this->parameters, $this->options);
+
+        $client = new Client($this->parameters, $this->options);
+        $client->ttl(3600);
+
+        return $client;
+
 
     }
 }
